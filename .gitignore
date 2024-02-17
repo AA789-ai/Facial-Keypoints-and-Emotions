@@ -1,0 +1,5 @@
+# Ignore IPython Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore the Emotion AI Dataset folder
+Emotion AI Dataset/
