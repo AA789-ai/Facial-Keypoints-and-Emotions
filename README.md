@@ -38,7 +38,7 @@ This part is divided into the following steps:
   9. **Testing the Model's Performance:** We evaluated the accuracy. We were able to achieve 91.6% of accuracy for part B. We also made a confusion matrix to demonstrate our data predictions. Most of our predictions aligns with true results. We also compared accuracy of prediction based on the emotions. Disgust performed the worse (as it had the least images).
 
 
-### Part c: Combining model from part A and part B
+### Part C: Combining model from part A and part B
 
 This part consists of combining the models designed in part A and part B and visualizing the results.
 
