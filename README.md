@@ -42,3 +42,6 @@ This part is divided into the following steps:
 
 This part consists of combining the models designed in part A and part B and visualizing the results.
 
+Here is a sample image of our results:
+
+![image](https://github.com/AA789-ai/EmotionAI/assets/97749196/ed4874ec-2434-44df-8476-aeb9df6f28c6)
