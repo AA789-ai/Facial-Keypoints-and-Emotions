@@ -1,47 +1,95 @@
-# Project Description
+# Facial Keypoint Detection and Emotion Recognition Project
 
-In this project we built a Convolutional Neural Network that is capable of recognizing the key facial points, and predict a person's emotions. This project is divided into 3 parts.
+## Project Overview
 
-### Part A: Detecting key facial points
+This project focuses on building and evaluating Convolutional Neural Network (CNN) models for analyzing human faces. It consists of two primary tasks:
+1.  **Facial Keypoint Detection:** Identifying the coordinates of key facial features (like eyes, nose, mouth corners) using a regression model.
+2.  **Emotion Recognition:** Classifying the facial expression into one of five categories (Anger, Disgust, Sadness, Happiness, Surprise) using a classification model.
 
-In part A, we implement a deep neural network model using regression capable of recognizing the key facial points of people's face. It can be divided in the following steps:
+Finally, the project demonstrates how to combine the outputs of these two models for a comprehensive facial analysis visualization.
 
-  1. **Loading Data:** This part consists of get some information about the dataset.
-  2. **Reshaping Data:** Since we will be processing from a one-dimension dataset, we will reshape it into 2D dataset.
-  3. **Visualising Data:** Visualizing data ensures the image are reshaped in an appropriate manner.
-  4. **Augmenting Data:** It is better to have more data to make a better predicting model. If we don't have additional data, we can perform data augmentation which consist of creating duplicate images and altering them to introduce noise. We will augment the data by duplicating the images from the dataset and doing horizontal flips, increasing brightness and vertical flips.
-  5. **Data Normalization:** Normalizing images ensures that pixel values of all images are scaled to a consistent range. This helps with speeding up the convergence of NN.
-  6. **Data Preparation:** We used 80% of the database for training and 20% for testing. The images picked for test and training are random.
-  7. **Building a Deep ResNet Convolution Block and Identity Blocks:** We implemented ResNet-18 architecture due to its efficiency and efficeness in deep learning tasks. It incorporates residual blocks to acoid the vanishing gradient problem which allows to train deeper networks. Since we are building ResNet-18 by ourself (to show understanding), specific steps in building the model are required. Refer to the code for details.
-  8. **Compiling And Training The Model:** This parts consists of training the model, saving the best model, as well as its architecture.
-  9. **Testing the Model's Performance:** We evaluated the accuracy. We were able to achieve 90.2% of accuracy for part A.
+## Key Features
 
-### Part B: Detecting the facial expression
+* **Facial Keypoint Detection:** Predicts the location of key facial points using a CNN-based regression approach, evaluated using Root Mean Squared Error (RMSE).
+* **Emotion Recognition:** Classifies facial expressions into 5 distinct categories, evaluated using the F1-score metric suitable for potentially imbalanced classes.
+* **Custom ResNet Architecture:** Implements a ResNet-18 inspired architecture from scratch for both tasks, demonstrating an understanding of residual blocks.
+* **Data Augmentation:** Employs various techniques (flipping, brightness adjustment, Keras `ImageDataGenerator`) to enhance model robustness and performance.
+* **Combined Visualization:** Integrates keypoint predictions and emotion classification onto input images.
 
-In part B, we implement a deep neural network model using classification techniques. It is capable of detecting people's expression amongst the following 5 expressions:
-  1. Anger
-  2. Digust
-  3. Sad
-  4. Happiness
-  5. Surprise
+## Results
 
-This part is divided into the following steps:
+* **Keypoint Detection:** The regression model achieved an **RMSE of ~2.01 pixels** on the test set for predicting facial keypoint locations. Lower RMSE indicates better performance.
+* **Emotion Recognition:** The classification model reached a **Weighted Average F1-score of 90%** on the test set (Accuracy: 90%). The confusion matrix and classification report showed strong overall performance, though 'Disgust' was less accurately predicted due to fewer training examples.
+* **Combined Output:** The system successfully integrates both predictions, providing a visual representation of keypoints and emotion on facial images.
 
-  1. **Loading Data:** This part consists of get some information about the dataset.
-  2. **Reshaping Data:** We reshape images of 48 by 48 pixels to 96 by 96 pixels.
-  3. **Visualising Data:** We visualize images and their emotion for sanity checks and the number of images per emotions. 
-  4. **Data Preparation:** We used 80% of the database for training and 20% for testing. The images picked for test and training are random.
-  5. **Data Normalization:** Normalizing images ensures that pixel values of all images are scaled to a consistent range. This helps with speeding up the convergence of NN.
-  6. **Augmenting Data:** To augment data, we use datagen from keras library and performation multiple augmentation techniques.
-  7. **Building a Deep ResNet:** Using the same convolution and identity blocks defined in Part A, we build our final model for part B.
-  8. **Compiling And Training The Model:** This parts consists of training the model, saving the best model, as well as its architecture.
-  9. **Testing the Model's Performance:** We evaluated the accuracy. We were able to achieve 91.6% of accuracy for part B. We also made a confusion matrix to demonstrate our data predictions. Most of our predictions aligns with true results. We also compared accuracy of prediction based on the emotions. Disgust performed the worse (as it had the least images).
+**Sample Combined Output:**
 
+![Facial Analysis Result](https://github.com/AA789-ai/EmotionAI/assets/97749196/ed4874ec-2434-44df-8476-aeb9df6f28c6)
+*Example output showing detected facial keypoints (blue dots) and the predicted emotion label overlaid on the input image.*
 
-### Part C: Combining model from part A and part B
+**Emotion Recognition Performance (Confusion Matrix):**
 
-This part consists of combining the models designed in part A and part B and visualizing the results.
+![Confusion Matrix for Emotion Recognition](https://github.com/user-attachments/assets/9a7ae36c-eaa6-4a51-95fd-9d59207c183c)
+*Confusion matrix showing the performance of the 5-class emotion recognition model on the test set. Rows represent true labels, columns represent predicted labels.*
 
-Here is a sample image of our results:
+## Technical Details
 
-![image](https://github.com/AA789-ai/EmotionAI/assets/97749196/ed4874ec-2434-44df-8476-aeb9df6f28c6)
+* **Frameworks/Libraries:** TensorFlow, Keras, OpenCV, Pandas, NumPy, Matplotlib
+* **Model Architecture:** Custom ResNet-18 implementation with Convolutional and Identity Blocks.
+* **Techniques:** Convolutional Neural Networks (CNNs), Regression, Classification, Data Augmentation, Transfer of architectural components (ResNet blocks) between tasks.
+
+## Methodology
+
+The project is structured into three main parts:
+
+### Part A: Facial Keypoint Detection (Regression)
+
+1.  **Loading Data & Reshaping:**
+    * Load the keypoint dataset (images and coordinates).
+    * Reshape image data from flattened arrays to 2D image format
+2.  **Visualising Data:**
+    * Visualize sample images with keypoints to verify loading and reshaping.
+3.  **Augmenting Data:**
+    * Generate augmented data from the training set by applying transformations like horizontal flipping, vertical flipping (use with caution for faces), and brightness adjustments.
+4.  **Data Normalization:**
+    * Normalize pixel values (e.g., scaling to [0, 1] or [-1, 1]) to aid model convergence.
+5.  **Data Preparation:**
+    * Split the data into training (80%) and testing (20%) sets randomly.
+6.  **Building Model (Custom ResNet-18):**
+    * Implement custom Convolutional and Identity blocks based on the ResNet philosophy to mitigate vanishing gradients in deep networks.
+    * Construct the ResNet-18 architecture using these blocks, ending with a regression output layer suitable for predicting keypoint coordinates.
+7.  **Compiling And Training The Model:**
+    * Compile the model with an appropriate optimizer (e.g., Adam) and loss function for regression (e.g., Mean Squared Error - MSE).
+    * Train the model on the training and augmented data, saving the best model weights based on validation performance.
+8.  **Testing the Model's Performance:**
+    * Evaluate the model on the test set using **Root Mean Squared Error (RMSE)** as the primary metric. The achieved RMSE was approximately **2.01 pixels**.
+
+### Part B: Emotion Recognition (Classification)
+
+1.  **Loading Data:**
+    * Load the emotion dataset (images and labels).
+2.  **Reshaping Data:**
+    * Resize images (e.g., from the original 48x48 pixels to 96x96 pixels to match the expected input size or improve feature extraction.
+3.  **Visualising Data:**
+    * Visualize sample images per emotion category and check class distribution.
+4.  **Data Preparation:**
+    * Split the data into training (80%) and testing (20%) sets randomly.
+5.  **Data Normalization:**
+    * Normalize pixel values.
+6.  **Augmenting Data:**
+    * Utilize Keras' `ImageDataGenerator` (or similar) to apply on-the-fly augmentation during training (e.g., rotations, shifts, shear, zoom, flips).
+7.  **Building Model (Custom ResNet):**
+    * Adapt the ResNet-18 architecture defined in Part A for classification. Reuse the Convolutional and Identity blocks.
+    * Replace the final layer with a classification head (e.g., Dense layer with Softmax activation for 5 emotion classes).
+8.  **Compiling And Training The Model:**
+    * Compile the model with an optimizer, a suitable loss function for multi-class classification (e.g., Categorical Crossentropy), and relevant metrics (including F1-score, accuracy).
+    * Train the model using the data generator for augmentation. Save the best model based on validation performance.
+9.  **Testing the Model's Performance:**
+    * Evaluate the model on the test set. The primary metric reported is the **Weighted Average F1-score**, which was **90%**, accounting for class imbalance. The overall accuracy was also 90%.
+    * Generate and analyze a confusion matrix and classification report to understand performance across different emotion classes (noting lower performance for the under-represented 'Disgust' class).
+
+### Part C: Combining Models from Part A and Part B
+
+1.  **Model Integration:** Load the trained models from Part A and Part B.
+2.  **Visualization Pipeline:** Create a process that takes an input face image, runs inference using both models (predicts keypoints and emotion), and displays the input image with the predicted facial keypoints overlaid and the predicted emotion label annotated.
+
